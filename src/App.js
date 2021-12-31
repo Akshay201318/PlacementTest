@@ -1,23 +1,28 @@
 import logo from './logo.svg';
 import './App.css';
+import { useEffect, useState } from 'react';
+import Header from './Components/Header';
+import Main from './Components/Main';
 
 function App() {
+  const [count, setCount] = useState(1);
+  const [evenOrOddCount, setEvenOrOdd] = useState('Odd');
+
+  const evenOrOdd = (count)=>{
+    if(count%2==0){
+      return 'Even';
+    }else{
+      return 'Odd';
+    }
+}
+
+  useEffect(()=>{
+    setEvenOrOdd(evenOrOdd(count))
+  },[count])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+       <Header count = {count} setCount = {setCount} evenOrOddCount = {evenOrOddCount}/>
+       <Main count = {count} setCount = {setCount} evenOrOddCount = {evenOrOddCount} />
     </div>
   );
 }
